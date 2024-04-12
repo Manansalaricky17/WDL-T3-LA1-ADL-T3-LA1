@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Admin Page</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>School Admin Page</h1>
+        
+        <div class="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+                <button id="login-btn">Login</button>
+            </div>
+        </div>
+
+        <div class="admin-menu" style="display: none;">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#students">Students</a>
+            <a href="#teachers">Teachers</a>
+            <a href="#courses">Courses</a>
+            <a href="#settings">Settings</a>
+        </div>
+
+        <div class="admin-content" id="dashboard" style="display: none;">
+            <h2>Dashboard</h2>
+            <div class="card">
+                <h3>Total Student</h3>
+                <p>1,264</p>
+            </div>
+            <div class="card">
+                <h3>Total Teachers</h3>
+                <p>58</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="admin-content" id="students" style="display: none;">
+            <h2>Students</h2>
+            <div class="card">
+                <h3>Student List</h3>
+                <ul>
+                    <li>Gaerlan, James</li>
+                    <li>Gacusan, Romeo</li>
+                    <li>Lopez, Benjielle</li>
+                    <li>Manansala, Ricky</li><br>
+                    <a>More!</a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-content" id="teachers" style="display: none;">
+            <h2>Teachers</h2>
+            <div class="card">
+                <h3>Teacher List</h3>
+                <ul>
+                    <li>Pascua, CO</li>
+                    <li>Marquez, MG</li>
+                    <li>Sunio Clarisse</li>
+                    <li>Cuevas, RJ</li><br>
+                    <a>More!</a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-content" id="courses" style="display: none;">
+            <h2>Courses</h2>
+            <div class="card">
+                <h3>Course List</h3>
+                <ul>
+                    <li>WEB DEV</li>
+                    <li>Philippine History</li>
+                    <li>Creative Writing</li>
+                    <li>Research Methodology</li><br>
+                    <a>More!</a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-content" id="settings" style="display: none;">
+            <h2>Settings</h2>
+            <div class="card">
+                <h3>General Settings</h3>
+                <p>Update your school's preferences here.</p>
+                <button>Update Profile</button><br>
+                <button>Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.querySelector('.login-form');
+        const adminMenu = document.querySelector('.admin-menu');
+        const menuLinks = document.querySelectorAll('.admin-menu a');
+        const contents = document.querySelectorAll('.admin-content');
+
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // For simplicity, let's assume username and password are correct
+            // In a real application, you'd validate them against a database or an authentication service
+            if (username && password) {
+                loginForm.style.display = 'none';
+                adminMenu.style.display = 'flex';
+                contents[0].style.display = 'block'; // Display the Students section by default
+            } else {
+                alert('Please enter valid credentials.');
+            }
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                contents.forEach(content => {
+                    if (content.id === targetId) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
